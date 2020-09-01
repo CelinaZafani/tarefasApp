@@ -13,7 +13,7 @@
       <ion-input formControlName="email" type="email" placeholder="digite seu E-mail"></ion-input>
       <ng-container *ngFor="let erro of mensagens_validacao.email">
          <span class="msg-erro"
-           *ngIf="formLogin.get('email').hasError(erro.tipo) && (formLogin.get('email').dirty || formLogin.get('email').touched)"></span>
+           *ngIf="formLogin.get('email').hasError(erro.tipo) && (formLogin.get('email').dirty || formLogin.get('email').touched)">
            {{erro.mensagem}}
         </span>
       </ng-container>
@@ -24,7 +24,7 @@
       <ion-input formControlName="senha" type="password" placeholder="digite sua Senha"></ion-input>
       <ng-container *ngFor="let erro of mensagens_validacao.senha">
         <span class="msg-erro"
-          *ngIf="formLogin.get('senha').hasError(erro.tipo) && (formLogin.get('senha').dirty || formLogin.get('senha').touched)"></span>
+          *ngIf="formLogin.get('senha').hasError(erro.tipo) && (formLogin.get('senha').dirty || formLogin.get('senha').touched)">
           {{erro.mensagem}}
        </span>
      </ng-container>
