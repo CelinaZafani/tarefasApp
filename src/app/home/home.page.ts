@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { UsuariosService } from '../services/usuarios.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +10,38 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(
+    public alertController: AlertController,
+    private usuarioService: UsuariosService,
+    private router: Router
+    ) {}
+
+  async ionViewWillEnter() {
+    const usuarioLogado = await this.usuarioService.buscarUsuarioLogado();
+      if (!usuarioLogado) {
+        this.router.navigateByUrl('/login');
+      }
+    }
+  
+
+  async exibirAlertLoogout() {
+    const alert = await this.alertController.create({
+      header: 'Confirmação!',
+      message: 'Deseja reamente sair???',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        }, {
+          text: 'Sim, desejo sair!',
+          handler: () => {
+            this.usuarioService.removerUsuarioLogado();
+            this.router.navigateByUrl('/login');
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
 
 }
